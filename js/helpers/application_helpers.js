@@ -43,11 +43,16 @@ kettu.ApplicationHelpers = {
 
   enableDragging: function() {
     if(!kettu.app.mobile) {
+      var context = this;
       // Setting distance to non-zero allows our custom single-click
       // and double-click behavior
       $("#torrents").selectable({distance: 1});
       $("#torrents").bind("selectablestop", function() {
+        var torrents = $('.torrent.ui-selected');
         $('#context_menu').hide();
+        context.highlightTorrents(torrents);
+        if(context.infoIsOpen()) { context.redirect('#/torrent_details'); }
+        $('#search').focus();
         kettu.app.trigger('refresh-torrent-details');
       });
     }
