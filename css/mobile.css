@@ -21,7 +21,7 @@ h3 {
 }
 
 #info h3 {
-  margin-top: 1em;
+  margin-top: 2em;
   margin-left: 0.5em;
 }
 
@@ -575,6 +575,10 @@ footer {
   margin: 0px;
   margin-top: -5px;
   margin-left: -10px;
+  position: fixed;
+  width: inherit;
+  z-index: 10;
+  background-color: #FFFFFF;
 }
 
 #info .menu {

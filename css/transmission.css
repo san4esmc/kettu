@@ -22,6 +22,10 @@ h3 {
   color: #444;
 }
 
+#info h3 {
+  margin-top: 2em;
+}
+
 /* structure */
 header,
 footer {
@@ -545,6 +549,7 @@ nav ul.icon_nav li a:hover {
   position: fixed;
   top: 140px;
   right: 0px;
+  bottom: 22px;
 }
 
 #info table {
@@ -653,6 +658,9 @@ nav ul.icon_nav li a:hover {
   margin: -1em -10px 1em -10px;
   background-color: #FFF;
   border-bottom: 1px solid #DFDFDF;
+  position: fixed;
+  width: inherit;
+  z-index: 10;
 }
 
 #info .menu {

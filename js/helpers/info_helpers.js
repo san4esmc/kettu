@@ -19,8 +19,6 @@ kettu.InfoHelpers = {
       info.css('height', $(document).height());
       info.css('width', $(document).width());
     } else {
-      info.css('height', $(document).height() - $('header').height() - $('footer').height() -
-        this.inPixel(info.css('padding-top')) - this.inPixel(info.css('padding-bottom')));
       info.css('left', ($(window).width() / 2) - ($('#container').width() / 2) + 550);
     }
     info.show();
