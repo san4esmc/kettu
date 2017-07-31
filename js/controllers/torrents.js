@@ -81,13 +81,25 @@ kettu.Torrents = function(transmission) {
     if(ids[ids.length - 1] <= 0) {
       delete ids[ids.length - 1];
     }
-
-    var request = context.buildRequest(context.params.method, { ids: ids });
-    context.remoteQuery(request, function() {
-      _.each(ids, function(id) {
-        context.getTorrent(id);
-      });
-    });
+	
+	if(context.params.start_download) {
+		context.remoteQuery({ method: 'torrent-start', arguments: { ids: ids } }, function() {
+			_.each(ids, function(id) {
+				context.getTorrent(id);
+			});
+		});
+	}
+	if(context.params.location) {
+		context.remoteQuery({
+			method: 'torrent-set-location',
+			arguments: { ids: ids, location: context.params.location, move: true }
+		}, function() {
+			_.each(ids, function(id) {
+				context.getTorrent(id);
+			});
+			kettu.app.trigger('flash', 'Torrents updated successfully.');
+		});
+	}
   });
 
   transmission.bind('get-torrents', function(e, params) {

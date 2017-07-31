@@ -9,8 +9,31 @@
 
 <form id="update_torrent" method="PUT" action="#/torrents">
   <div class="facebox_buttons">
-    <input type="hidden" name="ids" value="{{#torrents}}{{id}},{{/torrents}}" />
-    <input type="hidden" name="method" value="torrent-start" />
+    Download torrents to:<br />
+
+    {{#showLocations}}
+      <p>
+        <select class="locationSelect">
+          {{#locations}}
+            {{#group}}
+              <optgroup label="{{group}}">
+                {{#items}}
+                  <option value="{{path}}">{{name}}</option>
+                {{/items}}
+              </optgroup>
+            {{/group}}
+            {{^group}}
+              <option value="{{path}}">{{name}}</option>
+            {{/group}}
+          {{/locations}}
+        </select>
+      </p>
+    {{/showLocations}}
+
+	<input type="hidden" name="ids" value="{{#torrents}}{{id}},{{/torrents}}" />
+    <p class="location">
+      <input type="text" name="location" value="{{downloadDir}}" />
+    </p>
 
     <p>
       <input type="checkbox" name="start_download" checked="checked" />

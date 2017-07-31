@@ -205,14 +205,16 @@ kettu.TorrentView = function(torrent, context, sort_peers) {
       view.showLocations = false;
 
       if (_.isArray(kettu.config.locations) && kettu.config.locations.length > 0) {
-        view.locations = [{name: 'Default', path: (kettu.app.settings || {})['download-dir']}];
+        view.locations = [];
 
         _.each(kettu.config.locations, function(location) {
-          if (location.path !== view.locations[0].path) {
             view.locations.push(location);
-          }
         });
-
+		
+		if(view.locations.length == 0) {
+			view.locations = [{name: 'Default', path: (kettu.app.settings || {})['download-dir']}];
+		}
+		
         view.showLocations = true;
       }
   };

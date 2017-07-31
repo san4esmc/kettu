@@ -27,9 +27,12 @@
           context.closeInfo();
           var newest = context.getNewestTorrents(context, response);
           if(newest.length > 1) {
-            context.render('templates/torrents/new_multiple.mustache', {torrents: newest}, function(rendered_view) {
-              $.facebox(rendered_view);
-            });
+			context.getTorrent(newest[0].id, function(torrent) {
+				context.render('templates/torrents/new_multiple.mustache', kettu.MultipleTorrentsView(newest, context, torrent.downloadDir), function(rendered_view) {
+				  $.facebox(rendered_view);
+				  context.initLocations(torrent);
+				});
+			});
           } else {
             context.getTorrent(newest[0].id, function(torrent) {
               context.render('templates/torrents/new_with_data.mustache', kettu.TorrentView(torrent, context, context.params.sort_peers), function(rendered_view) {
@@ -124,7 +127,7 @@
           now = parseInt(new Date().getTime().toString().substr(0, 10), 10);
 
       return _.select(torrents, function(torrent) {
-        return parseInt(torrent.addedDate, 10) - now > -2;
+        return parseInt(torrent.addedDate, 10) - now > -10;
       });
     },
 
