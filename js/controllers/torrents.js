@@ -42,7 +42,7 @@ kettu.Torrents = function(transmission) {
 
   transmission.post('#/torrents', function(context) {
     if(this.params.url.length > 0) {
-      var request = context.buildRequest('torrent-add', { filename: this.params.url, paused: !kettu.app.mobile });
+      var request = context.buildRequest('torrent-add', { filename: this.params.url, paused: true });
       context.addTorrent(context, request);
     } else {
       context.submitAddTorrentForm(context, true);
